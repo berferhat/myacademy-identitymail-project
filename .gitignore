@@ -7,9 +7,6 @@ obj/
 *.cache
 *.log
 
-## Editor
-.cursor/
-
 ## Theme reference files
 IdentityMailWeb/wwwroot/theme/stitch_ui/
 
