@@ -1,0 +1,53 @@
+﻿@model List<UserMessage>
+
+@{
+    Layout = "_MailLayout";
+    ViewData["Title"] = "Önemli Mesajlar";
+}
+
+
+<div class="flex justify-between items-center mb-6">
+    <h2 class="font-headline-md text-headline-md text-on-surface">Önemli Mesajlar</h2>
+</div>
+
+<div class="bg-surface rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+    @foreach (var item in Model)
+    {
+        <div class="flex items-center p-4 border-b border-outline-variant hover:bg-surface-container-low transition-colors cursor-pointer group @(item.IsRead ? "" : "relative bg-surface-bright")">
+            <div class="flex items-center gap-4 flex-1 min-w-0">
+                @if (!item.IsRead)
+                {
+                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+                }
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    @if (!item.IsRead)
+                    {
+                        <span class="material-symbols-outlined text-primary text-xl" data-icon="circle" style="font-variation-settings: 'FILL' 1;">circle</span>
+                    }
+                    else
+                    {
+                        <span class="material-symbols-outlined text-transparent text-xl" data-icon="circle">circle</span>
+                    }
+                    <a href="/Message/ToggleImportant/@item.Id">
+                        <span class="material-symbols-outlined text-[#fbbf24] text-xl" style="font-variation-settings: 'FILL' 1;" data-icon="star">star</span>
+                    </a>
+
+                </div>
+                <a href="/Message/MailDetail/@item.Id" class="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 flex-1 min-w-0">
+                    <span class="@(item.IsRead ? "font-body-sm text-body-sm text-on-surface-variant" : "font-label-md text-label-md text-on-surface") md:w-48 truncate flex-shrink-0">@item.Sender.FirstName @item.Sender.LastName</span>
+                    <div class="flex-1 truncate">
+                        <span class="@(item.IsRead ? "font-body-md text-body-md text-on-surface" : "font-label-md text-label-md text-on-surface")">@item.Subject</span>
+                        <span class="font-body-sm text-body-sm text-on-surface-variant truncate ml-1">— @(item.Body != null && item.Body.Length > 80 ? item.Body.Substring(0, 80) + "..." : item.Body)</span>
+                    </div>
+                </a>
+            </div>
+            <div class="flex-shrink-0 ml-4 flex items-center gap-3">
+                @if (item.Category != null)
+                {
+                    <span class="hidden md:flex bg-tertiary-container text-on-tertiary-container font-label-sm text-[10px] px-2 py-0.5 rounded-full items-center gap-1">@item.Category.Name</span>
+                }
+                <span class="font-label-sm text-label-sm @(item.IsRead ? "text-on-surface-variant" : "text-primary font-bold")">@item.SendDate.ToString("dd MMM")</span>
+            </div>
+        </div>
+    }
+</div>

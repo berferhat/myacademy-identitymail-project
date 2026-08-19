@@ -1,0 +1,51 @@
+﻿@model UserMessage
+
+@{
+    Layout = "_MailLayout";
+    ViewData["Title"] = "Mail Detay";
+}
+
+<div class="max-w-3xl">
+    <div class="mb-6">
+        <a href="/Message/Index" class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary font-label-sm text-label-sm transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="arrow_back">arrow_back</span>
+            Gelen Kutusuna Dön
+        </a>
+    </div>
+
+    <div class="bg-surface rounded-xl shadow-sm border border-outline-variant p-6">
+        <div class="flex justify-between items-start mb-4">
+            <h2 class="font-headline-md text-headline-md text-on-surface">@Model.Subject</h2>
+            @if (Model.Category != null)
+            {
+                <span class="bg-tertiary-container text-on-tertiary-container font-label-sm text-[10px] px-2 py-0.5 rounded-full">@Model.Category.Name</span>
+            }
+        </div>
+
+        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-outline-variant">
+            <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-label-md">
+                @Model.Sender.FirstName.Substring(0, 1)
+            </div>
+            <div>
+                <div class="font-label-md text-label-md text-on-surface">@Model.Sender.FirstName @Model.Sender.LastName</div>
+                <div class="font-label-sm text-label-sm text-on-surface-variant">@Model.Sender.Email</div>
+            </div>
+            <div class="ml-auto font-label-sm text-label-sm text-on-surface-variant">@Model.SendDate.ToString("dd MMM yyyy, HH:mm")</div>
+        </div>
+
+        <div class="font-body-md text-body-md text-on-surface leading-relaxed whitespace-pre-line mb-6">
+            @Model.Body
+        </div>
+
+        <div class="flex gap-2 pt-4 border-t border-outline-variant">
+            <a href="/Message/Reply/@Model.Id" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:bg-primary-fixed-dim transition-colors">
+                <span class="material-symbols-outlined text-sm" data-icon="reply">reply</span>
+                Yanıtla
+            </a>
+            <a href="/Message/Index" class="inline-flex items-center gap-2 px-4 py-2 border border-outline-variant text-on-surface-variant rounded-lg font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">
+                <span class="material-symbols-outlined text-sm" data-icon="arrow_back">arrow_back</span>
+                Geri Dön
+            </a>
+        </div>
+    </div>
+</div>

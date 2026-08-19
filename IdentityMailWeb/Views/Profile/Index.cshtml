@@ -1,0 +1,48 @@
+@model ProfileDto
+
+@{
+    Layout = "_MailLayout";
+    ViewData["Title"] = "Profilim";
+}
+
+<div class="max-w-3xl">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="font-headline-md text-headline-md text-on-surface">Profilim</h2>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="bg-tertiary-container text-on-tertiary-container font-body-sm px-4 py-3 rounded-lg mb-4">@TempData["SuccessMessage"]</div>
+    }
+
+    <div class="bg-surface rounded-xl shadow-sm border border-outline-variant p-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-error font-body-sm mb-2"></div>
+
+            <div class="space-y-4">
+                <div>
+                    <label asp-for="FirstName" class="block font-label-md text-label-md text-on-surface mb-1">Ad</label>
+                    <input asp-for="FirstName" class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-2 px-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm" />
+                    <span asp-validation-for="FirstName" class="text-error font-body-sm"></span>
+                </div>
+                <div>
+                    <label asp-for="LastName" class="block font-label-md text-label-md text-on-surface mb-1">Soyad</label>
+                    <input asp-for="LastName" class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-2 px-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm" />
+                    <span asp-validation-for="LastName" class="text-error font-body-sm"></span>
+                </div>
+                <div>
+                    <label asp-for="ProfileImageUrl" class="block font-label-md text-label-md text-on-surface mb-1">Profil Fotoğrafı URL</label>
+                    <input asp-for="ProfileImageUrl" class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-2 px-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm" />
+                    <span asp-validation-for="ProfileImageUrl" class="text-error font-body-sm"></span>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-outline-variant">
+                <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:bg-primary-fixed-dim transition-colors">
+                    <span class="material-symbols-outlined text-sm" data-icon="save">save</span>
+                    Güncelle
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

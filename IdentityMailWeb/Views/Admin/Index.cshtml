@@ -1,0 +1,67 @@
+@model AdminDashboardDto
+
+@{
+    Layout = "_MailLayout";
+    ViewData["Title"] = "Admin Paneli";
+}
+
+<div class="mb-6">
+    <h2 class="font-headline-md text-headline-md text-on-surface">Admin Paneli</h2>
+</div>
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    <div class="bg-surface rounded-xl shadow-sm border border-outline-variant p-5 flex flex-col items-center">
+        <span class="material-symbols-outlined text-primary text-3xl mb-2" data-icon="group">group</span>
+        <span class="font-headline-sm text-headline-sm text-on-surface">@Model.UserCount</span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">Kullanıcı</span>
+    </div>
+    <div class="bg-surface rounded-xl shadow-sm border border-outline-variant p-5 flex flex-col items-center">
+        <span class="material-symbols-outlined text-primary text-3xl mb-2" data-icon="mail">mail</span>
+        <span class="font-headline-sm text-headline-sm text-on-surface">@Model.MessageCount</span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">Mesaj</span>
+    </div>
+    <div class="bg-surface rounded-xl shadow-sm border border-outline-variant p-5 flex flex-col items-center">
+        <span class="material-symbols-outlined text-primary text-3xl mb-2" data-icon="mark_email_unread">mark_email_unread</span>
+        <span class="font-headline-sm text-headline-sm text-on-surface">@Model.UnreadCount</span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">Okunmamış</span>
+    </div>
+    <div class="bg-surface rounded-xl shadow-sm border border-outline-variant p-5 flex flex-col items-center">
+        <span class="material-symbols-outlined text-primary text-3xl mb-2" data-icon="delete">delete</span>
+        <span class="font-headline-sm text-headline-sm text-on-surface">@Model.TrashCount</span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">Çöp</span>
+    </div>
+</div>
+
+<div class="grid md:grid-cols-2 gap-6">
+    <div class="bg-surface rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+        <div class="px-5 py-4 border-b border-outline-variant">
+            <h3 class="font-headline-sm text-headline-sm text-on-surface">En Çok Göndеrenler</h3>
+        </div>
+        @foreach (var item in Model.TopSenders)
+        {
+            <div class="flex items-center justify-between px-5 py-3 border-b border-outline-variant last:border-0">
+                <div>
+                    <div class="font-label-md text-label-md text-on-surface">@item.FullName</div>
+                    <div class="font-label-sm text-label-sm text-on-surface-variant">@item.Email</div>
+                </div>
+                <span class="bg-primary-container text-on-primary-container font-label-sm text-[12px] px-2 py-0.5 rounded-full">@item.MessageCount</span>
+            </div>
+        }
+    </div>
+
+    <div class="bg-surface rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+        <div class="px-5 py-4 border-b border-outline-variant">
+            <h3 class="font-headline-sm text-headline-sm text-on-surface">En Çok Kullanılan Kategoriler</h3>
+        </div>
+        @foreach (var item in Model.TopCategories)
+        {
+            <div class="flex items-center justify-between px-5 py-3 border-b border-outline-variant last:border-0">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-on-surface-variant" data-icon="label">label</span>
+                    <span class="font-label-md text-label-md text-on-surface">@item.Name</span>
+                </div>
+                <span class="bg-secondary-container text-on-secondary-container font-label-sm text-[12px] px-2 py-0.5 rounded-full">@item.MessageCount</span>
+            </div>
+        }
+    </div>
+</div>

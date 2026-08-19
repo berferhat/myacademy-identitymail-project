@@ -1,0 +1,111 @@
+﻿@model RegisterDto
+
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+
+
+<main class="flex-grow flex items-center justify-center p-4 md:p-8 z-10 relative">
+    <!-- Auth Card (Level 1 Surface) -->
+    <div class="w-full max-w-[480px] bg-surface-container-lowest rounded-xl shadow-soft border border-surface-variant p-8 md:p-10 flex flex-col gap-8 relative overflow-hidden">
+        <!-- Subtle top accent line -->
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-tertiary"></div>
+        <!-- Header -->
+        <div class="text-center flex flex-col gap-2">
+            <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">
+                Kayıt Ol
+            </h1>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">
+                Güvenli kurumsal iletişim platformuna katılın.
+            </p>
+        </div>
+        <!-- Form -->
+        <form method="post" class="flex flex-col gap-5">
+            <!-- Name Row (Grid) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- First Name -->
+                <div class="flex flex-col gap-1.5">
+                    <label class="font-label-md text-label-md text-on-surface" for="firstName">Ad</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px] pointer-events-none">person</span>
+                        <input asp-for="FirstName" class="identity-input w-full rounded-lg pl-10 pr-3 py-2.5 font-body-md text-body-md text-on-surface placeholder:text-outline-variant transition-colors" id="firstName" placeholder="Adınız" required="" type="text" />
+                    </div>
+                </div>
+                <!-- Last Name -->
+                <div class="flex flex-col gap-1.5">
+                    <label class="font-label-md text-label-md text-on-surface" for="lastName">Soyad</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px] pointer-events-none">badge</span>
+                        <input asp-for="LastName" class="identity-input w-full rounded-lg pl-10 pr-3 py-2.5 font-body-md text-body-md text-on-surface placeholder:text-outline-variant transition-colors" id="lastName" placeholder="Soyadınız" required="" type="text" />
+                    </div>
+                </div>
+            </div>
+            <!-- Username -->
+            <div class="flex flex-col gap-1.5">
+                <label class="font-label-md text-label-md text-on-surface" for="username">Kullanıcı Adı</label>
+                <div class="relative">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px] pointer-events-none">alternate_email</span>
+                    <input asp-for="UserName" class="identity-input w-full rounded-lg pl-10 pr-3 py-2.5 font-body-md text-body-md text-on-surface placeholder:text-outline-variant transition-colors" id="username" placeholder="kullanıcıadı" required="" type="text" />
+                </div>
+            </div>
+            <!-- Email -->
+            <div class="flex flex-col gap-1.5">
+                <label class="font-label-md text-label-md text-on-surface" for="email">E-posta</label>
+                <div class="relative">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px] pointer-events-none">mail</span>
+                    <input asp-for="Email" class="identity-input w-full rounded-lg pl-10 pr-3 py-2.5 font-body-md text-body-md text-on-surface placeholder:text-outline-variant transition-colors" id="email" placeholder="ornek@alanadi.com" required="" type="email" />
+                </div>
+            </div>
+            <!-- Password -->
+            <div class="flex flex-col gap-1.5">
+                <label class="font-label-md text-label-md text-on-surface" for="password">Şifre</label>
+                <div class="relative group">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px] pointer-events-none group-focus-within:text-primary transition-colors">lock</span>
+                    <input asp-for="Password" class="identity-input w-full rounded-lg pl-10 pr-10 py-2.5 font-body-md text-body-md text-on-surface placeholder:text-outline-variant transition-colors" id="password" placeholder="••••••••" required="" type="password" />
+                    <button aria-label="Toggle password visibility" class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors focus:outline-none" type="button">
+                        <span class="material-symbols-outlined text-[20px]">visibility_off</span>
+                    </button>
+                </div>
+                <!-- Password strength meter (decorative for UI) -->
+                <div class="flex gap-1 mt-1">
+                    <div class="h-1 flex-1 bg-surface-variant rounded-full overflow-hidden">
+                        <div class="h-full bg-primary w-1/4"></div>
+                    </div>
+                    <div class="h-1 flex-1 bg-surface-variant rounded-full"></div>
+                    <div class="h-1 flex-1 bg-surface-variant rounded-full"></div>
+                    <div class="h-1 flex-1 bg-surface-variant rounded-full"></div>
+                </div>
+            </div>
+            <!-- Password Repeat -->
+            <div class="flex flex-col gap-1.5">
+                <label class="font-label-md text-label-md text-on-surface" for="passwordRepeat">
+                    Şifre Tekrarı
+                </label>
+                <div class="relative group">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px] pointer-events-none group-focus-within:text-primary transition-colors">lock</span>
+                    <input asp-for="ConfirmPassword" class="identity-input w-full rounded-lg pl-10 pr-10 py-2.5 font-body-md text-body-md text-on-surface placeholder:text-outline-variant transition-colors" id="passwordRepeat" placeholder="••••••••" required="" type="password" />
+                </div>
+            </div>
+            <!-- Security Indicator Note -->
+            <div class="flex items-center gap-2 p-3 bg-tertiary-fixed/20 rounded-lg border border-tertiary-fixed-dim/30 mt-2">
+                <span class="material-symbols-outlined text-tertiary text-[18px]">verified_user</span>
+                <p class="font-label-sm text-label-sm text-tertiary">Uçtan uca şifreleme ile güvendesiniz.</p>
+            </div>
+            <span class="text-danger">@Html.ValidationSummary()</span>
+            <!-- Action Button -->
+            <button class="btn-primary w-full py-3 rounded-lg font-label-md text-label-md text-on-primary flex items-center justify-center gap-2 mt-4" type="submit">
+                Kayıt Ol
+                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+            </button>
+        </form>
+        <!-- Footer Links -->
+        <div class="text-center">
+            <p class="font-body-sm text-body-sm text-on-surface-variant">
+                Zaten hesabın var mı?
+                <a asp-controller="Auth" asp-action="Login" class="font-label-md text-label-md text-primary hover:text-primary-fixed-dim hover:underline transition-colors ml-1">Giriş Yap</a>
+            </p>
+        </div>
+    </div>
+</main>

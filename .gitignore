@@ -1,0 +1,19 @@
+## Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+
+## Cursor / AI
+.cursor/
+
+## Stitch UI kaynak dosyaları (referans HTML'ler, repo'ya gereksiz)
+wwwroot/theme/stitch_ui/
+
+## OS
+Thumbs.db
+Desktop.ini
+.DS_Store

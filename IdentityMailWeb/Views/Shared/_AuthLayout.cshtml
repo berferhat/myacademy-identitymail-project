@@ -1,0 +1,175 @@
+﻿
+
+
+<!DOCTYPE html>
+
+<html class="light" lang="tr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>@ViewData["Title"] - IdentityMail</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap"
+          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+          rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#191c1e",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-container": "#f4fffc",
+                        "primary-container": "#007bb9",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-container-highest": "#e0e3e5",
+                        "secondary-container": "#dae2fd",
+                        "on-surface-variant": "#3f4850",
+                        "surface-bright": "#f7f9fb",
+                        "surface-container": "#eceef0",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#00201d",
+                        "inverse-primary": "#93ccff",
+                        "on-error-container": "#93000a",
+                        "outline": "#707881",
+                        "background": "#f7f9fb",
+                        "secondary-fixed": "#dae2fd",
+                        "surface": "#f7f9fb",
+                        "tertiary-container": "#008378",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary-fixed": "#89f5e7",
+                        "primary": "#006194",
+                        "on-secondary-fixed": "#131b2e",
+                        "on-secondary-container": "#5c647a",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "primary-fixed": "#cce5ff",
+                        "secondary": "#565e74",
+                        "on-surface": "#191c1e",
+                        "primary-fixed-dim": "#93ccff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "on-primary-container": "#fdfcff",
+                        "outline-variant": "#bfc7d2",
+                        "on-primary-fixed-variant": "#004b73",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "surface-tint": "#006398",
+                        "on-error": "#ffffff",
+                        "tertiary": "#00685f",
+                        "on-primary-fixed": "#001d31",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005049"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding-mobile": "1rem",
+                        "stack-lg": "2rem",
+                        "stack-sm": "0.5rem",
+                        "unit": "8px",
+                        "stack-md": "1rem",
+                        "container-padding-desktop": "2.5rem",
+                        "gutter": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Montserrat"],
+                        "label-sm": ["Montserrat"],
+                        "label-md": ["Montserrat"],
+                        "body-sm": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "headline-sm": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    },
+                    backgroundImage: {
+                        'brand-gradient': 'linear-gradient(to bottom, #0284c7, #0369a1)',
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 30px -12px rgba(15, 23, 42, 0.12)',
+                        'soft-level-1': '0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -1px rgba(15, 23, 42, 0.03)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .bg-noise {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+        }
+
+        .input-glow:focus {
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+            border-color: #0284c7;
+        }
+
+        .identity-input {
+            transition: all 0.2s ease-in-out;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+        }
+
+        .identity-input:focus {
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+            outline: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
+            color: #ffffff;
+            border: none;
+            transition: transform 0.1s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.05);
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+        }
+
+        .btn-primary:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-surface min-h-screen flex flex-col font-body-md text-on-surface bg-noise antialiased">
+    @RenderBody()
+</body>
+
+</html>

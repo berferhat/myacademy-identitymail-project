@@ -1,0 +1,72 @@
+﻿@model SendMailDto
+
+@{
+    Layout = "_MailLayout";
+    ViewData["Title"] = "Yeni Mail";
+}
+
+<div class="max-w-3xl">
+    <div class="mb-6">
+        <a href="/Message/Index" class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary font-label-sm text-label-sm transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="arrow_back">arrow_back</span>
+            Gelen Kutusuna Dön
+        </a>
+    </div>
+
+    <div class="bg-surface rounded-xl shadow-sm border border-outline-variant p-6">
+        <h2 class="font-headline-md text-headline-md text-on-surface mb-6">
+            @(Model != null && Model.Id > 0 ? "Taslağı Düzenle" : "Yeni Mail Gönder")
+        </h2>
+
+        <form method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface mb-1">Alıcı Mail</label>
+                    <input type="text" asp-for="ReceiverMail" required class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-2 px-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm" />
+                </div>
+
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface mb-1">Konu</label>
+                    <input type="text" asp-for="Subject" required class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-2 px-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm" />
+                </div>
+
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface mb-1">Kategori</label>
+                    <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-2 px-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm">
+                        <option value="">Kategori seçiniz (opsiyonel)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface mb-1">Mail İçeriği</label>
+                    <textarea asp-for="Body" required rows="10" class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-2 px-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm"></textarea>
+                </div>
+            </div>
+
+            <div class="text-error font-body-sm mt-2">@Html.ValidationSummary()</div>
+
+            <div class="flex gap-2 mt-6 pt-4 border-t border-outline-variant">
+                @if (Model != null && Model.Id > 0)
+                {
+                    <button type="submit" formaction="/Message/EditDraft" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:bg-primary-fixed-dim transition-colors">
+                        <span class="material-symbols-outlined text-sm" data-icon="save">save</span>
+                        Taslağı Güncelle
+                    </button>
+                }
+                else
+                {
+                    <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:bg-primary-fixed-dim transition-colors">
+                        <span class="material-symbols-outlined text-sm" data-icon="send">send</span>
+                        Gönder
+                    </button>
+                    <button type="submit" formaction="/Message/SaveDraft" class="inline-flex items-center gap-2 px-4 py-2 border border-outline-variant text-on-surface-variant rounded-lg font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined text-sm" data-icon="draft">draft</span>
+                        Taslak Kaydet
+                    </button>
+                }
+            </div>
+        </form>
+    </div>
+</div>

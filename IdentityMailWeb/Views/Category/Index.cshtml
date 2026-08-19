@@ -1,0 +1,41 @@
+@model List<Category>
+
+@{
+    Layout = "_MailLayout";
+    ViewData["Title"] = "Kategoriler";
+}
+
+<div class="max-w-3xl">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="font-headline-md text-headline-md text-on-surface">Kategoriler</h2>
+    </div>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="bg-error-container text-on-error-container font-body-sm px-4 py-3 rounded-lg mb-4">@TempData["Error"]</div>
+    }
+
+    <div class="bg-surface rounded-xl shadow-sm border border-outline-variant overflow-hidden mb-6">
+        @foreach (var item in Model)
+        {
+            <div class="flex items-center justify-between p-4 border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-on-surface-variant text-xl" data-icon="label">label</span>
+                    <span class="font-label-md text-label-md text-on-surface">@item.Name</span>
+                </div>
+                <a href="/Category/Delete/@item.Id" class="material-symbols-outlined text-on-surface-variant hover:text-error text-xl transition-colors" data-icon="delete">delete</a>
+            </div>
+        }
+    </div>
+
+    <div class="bg-surface rounded-xl shadow-sm border border-outline-variant p-6">
+        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-4">Yeni Kategori</h3>
+        <form method="post" asp-action="Create" class="flex gap-2">
+            <input type="text" name="name" required placeholder="Kategori adı" class="flex-1 bg-surface-container-low border border-outline-variant rounded-lg py-2 px-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm" />
+            <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:bg-primary-fixed-dim transition-colors">
+                <span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                Ekle
+            </button>
+        </form>
+    </div>
+</div>

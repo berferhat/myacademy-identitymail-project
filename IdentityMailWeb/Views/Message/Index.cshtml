@@ -1,0 +1,148 @@
+@model List<UserMessage>
+
+@{
+    Layout = "_MailLayout";
+    ViewData["Title"] = "Gelen Kutusu";
+
+    var queryWithoutCategory = (string.IsNullOrEmpty((string)ViewBag.search) ? "" : "&search=" + ViewBag.search)
+                             + (ViewBag.startDate != null ? "&startDate=" + ((DateTime)ViewBag.startDate).ToString("yyyy-MM-dd") : "")
+                             + (ViewBag.endDate != null ? "&endDate=" + ((DateTime)ViewBag.endDate).ToString("yyyy-MM-dd") : "");
+
+    var queryWithCategory = (ViewBag.categoryId != null ? "&categoryId=" + ViewBag.categoryId : "") + queryWithoutCategory;
+
+    var pillActive = "bg-primary-container text-on-primary-container";
+    var pillDefault = "text-on-surface-variant hover:bg-surface-container-high border border-outline-variant";
+
+    var catActive = "bg-secondary-container text-on-secondary-container";
+    var catDefault = "text-on-surface-variant hover:bg-surface-container-high border border-outline-variant";
+}
+
+<div class="flex justify-between items-center mb-4">
+    <h2 class="font-headline-md text-headline-md text-on-surface">Gelen Kutusu</h2>
+</div>
+
+<div class="bg-surface rounded-xl shadow-sm border border-outline-variant p-4 mb-4 space-y-3">
+    <div class="flex flex-wrap gap-2">
+        <a href="/Message/Index?filter=all@(queryWithCategory)" class="px-4 py-1.5 rounded-full font-label-sm text-label-sm transition-colors @(ViewBag.filter == "all" ? pillActive : pillDefault)">Tümü</a>
+        <a href="/Message/Index?filter=unread@(queryWithCategory)" class="px-4 py-1.5 rounded-full font-label-sm text-label-sm transition-colors @(ViewBag.filter == "unread" ? pillActive : pillDefault)">Okunmayan</a>
+        <a href="/Message/Index?filter=read@(queryWithCategory)" class="px-4 py-1.5 rounded-full font-label-sm text-label-sm transition-colors @(ViewBag.filter == "read" ? pillActive : pillDefault)">Okunan</a>
+    </div>
+
+    <form method="get" asp-action="Index" class="flex flex-wrap items-center gap-2">
+        <input type="hidden" name="filter" value="@ViewBag.filter" />
+        @if (ViewBag.categoryId != null)
+        {
+            <input type="hidden" name="categoryId" value="@ViewBag.categoryId" />
+        }
+        <input type="date" name="startDate" class="w-40 bg-surface-container-low border border-outline-variant rounded-lg py-1.5 px-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm" value="@(ViewBag.startDate != null ? ((DateTime)ViewBag.startDate).ToString("yyyy-MM-dd") : "")" />
+        <input type="date" name="endDate" class="w-40 bg-surface-container-low border border-outline-variant rounded-lg py-1.5 px-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm" value="@(ViewBag.endDate != null ? ((DateTime)ViewBag.endDate).ToString("yyyy-MM-dd") : "")" />
+        <input type="text" name="search" value="@ViewBag.search" class="flex-1 min-w-[180px] bg-surface-container-low border border-outline-variant rounded-lg py-1.5 px-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm placeholder:text-on-surface-variant" placeholder="Gönderen veya konu ara" />
+        <button type="submit" class="px-3 py-1.5 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:bg-primary-fixed-dim transition-colors">Ara</button>
+        <a href="/Message/Index?filter=@ViewBag.filter@(ViewBag.categoryId != null ? "&categoryId=" + ViewBag.categoryId : "")" class="px-3 py-1.5 border border-outline-variant text-on-surface-variant rounded-lg font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">Temizle</a>
+    </form>
+
+    <div class="flex flex-wrap gap-2">
+        <a href="/Message/Index?filter=@ViewBag.filter@(queryWithoutCategory)" class="px-3 py-1 rounded-full font-label-sm text-label-sm transition-colors @(ViewBag.categoryId == null ? catActive : catDefault)">Tüm Kategoriler</a>
+        @foreach (var category in ViewBag.Categories)
+        {
+            <a href="/Message/Index?filter=@ViewBag.filter&categoryId=@category.Id@(queryWithoutCategory)" class="px-3 py-1 rounded-full font-label-sm text-label-sm transition-colors @(ViewBag.categoryId == category.Id ? catActive : catDefault)">@category.Name</a>
+        }
+    </div>
+</div>
+<!-- Email List Container -->
+<div class="bg-surface rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+    <!-- Email Row 1 (Unread) -->
+    @foreach (var item in Model)
+
+    {
+
+        <div class="flex items-center p-4 border-b border-outline-variant hover:bg-surface-container-low transition-colors cursor-pointer group @(item.IsRead ? "" : "relative bg-surface-bright")">
+
+            @if (!item.IsRead)
+            {
+                <div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+            }
+
+            <div class="flex items-center gap-4 flex-1 min-w-0">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    @if (!item.IsRead)
+                    {
+                        <span class="material-symbols-outlined text-primary text-xl" data-icon="circle" style="font-variation-settings: 'FILL' 1;">circle</span>
+                    }
+                    else
+                    {
+                        <span class="material-symbols-outlined text-transparent text-xl" data-icon="circle">circle</span>
+                    }
+                    <a href="/Message/ToggleImportant/@item.Id">
+                        @if (item.IsImportant)
+                        {
+                            <span class="material-symbols-outlined text-[#fbbf24] hover:text-primary text-xl" style="font-variation-settings: 'FILL' 1;" data-icon="star">star</span>
+                        }
+                        else
+                        {
+                            <span class="material-symbols-outlined text-outline-variant hover:text-primary text-xl" data-icon="star">star</span>
+                        }
+                    </a>
+                </div>
+                <a href="/Message/MailDetail/@item.Id" class="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 flex-1 min-w-0">
+                    <span class="font-label-md text-label-md text-on-surface md:w-48 truncate flex-shrink-0">
+                        @item.Sender.FirstName @item.Sender.LastName
+                    </span>
+                    <div class="flex-1 truncate">
+                        <span class="@(item.IsRead ? "font-body-md text-body-md text-on-surface" : "font-label-md text-label-md text-on-surface")">
+                            @item.Subject
+                        </span>
+                        <span class="font-body-sm text-body-sm text-on-surface-variant truncate ml-1">
+                            — @(item.Body != null && item.Body.Length > 80 ? item.Body.Substring(0, 80) + "..." : item.Body)
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <div class="flex-shrink-0 ml-4 flex items-center gap-3">
+                @if (item.Category != null)
+                {
+                    <span class="hidden md:flex bg-tertiary-container text-on-tertiary-container font-label-sm text-[10px] px-2 py-0.5 rounded-full items-center gap-1">
+
+                        @item.Category.Name
+                    </span>
+                }
+                <span class="font-label-sm text-label-sm @(item.IsRead ? "text-on-surface-variant" : "text-primary font-bold")">
+                    @item.SendDate.ToString("dd MMM")
+                </span>
+
+            </div>
+        </div>
+
+    }
+</div>
+<!-- Pagination/Footer simple -->
+@{
+    var start = (ViewBag.page - 1) * ViewBag.pageSize + 1;
+    var end = Math.Min(ViewBag.page * ViewBag.pageSize, ViewBag.totalCount);
+}
+
+<div class="mt-4 flex justify-between items-center px-2">
+    <span class="font-body-sm text-body-sm text-on-surface-variant">
+        @(ViewBag.totalCount > 0 ? $"{start}-{end} / {ViewBag.totalCount} gösteriliyor" : "Mail bulunamadı")
+    </span>
+    @if (ViewBag.totalPages > 1)
+    {
+        <div class="flex gap-1">
+            @if (ViewBag.page > 1)
+            {
+                <a href="/Message/Index?filter=@ViewBag.filter&page=@(ViewBag.page - 1)@(queryWithCategory)" class="p-1 rounded text-outline hover:bg-surface-container-high transition-colors">
+                    <span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+                </a>
+            }
+            @if (ViewBag.page < ViewBag.totalPages)
+            {
+                <a href="/Message/Index?filter=@ViewBag.filter&page=@(ViewBag.page + 1)@(queryWithCategory)" class="p-1 rounded text-on-surface hover:bg-surface-container-high transition-colors">
+                    <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+                </a>
+            }
+        </div>
+    }
+</div>
+
+
+

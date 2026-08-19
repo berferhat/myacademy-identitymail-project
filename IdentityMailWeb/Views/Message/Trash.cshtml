@@ -1,0 +1,38 @@
+﻿@model List<UserMessage>
+
+@{
+    Layout = "_MailLayout";
+    ViewData["Title"] = "Çöp Kutusu";
+}
+
+<div class="flex justify-between items-center mb-6">
+    <h2 class="font-headline-md text-headline-md text-on-surface">Çöp Kutusu</h2>
+</div>
+
+<div class="bg-surface rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+    @foreach (var item in Model)
+    {
+        <div class="flex items-center p-4 border-b border-outline-variant hover:bg-surface-container-low transition-colors group">
+            <div class="flex items-center gap-4 flex-1 min-w-0">
+                <div class="flex-shrink-0">
+                    <span class="material-symbols-outlined text-on-surface-variant text-xl" data-icon="delete">delete</span>
+                </div>
+                <a href="/Message/MailDetail/@item.Id" class="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 flex-1 min-w-0">
+                    <span class="font-body-sm text-body-sm text-on-surface-variant md:w-48 truncate flex-shrink-0">@item.Sender.FirstName @item.Sender.LastName</span>
+                    <div class="flex-1 truncate">
+                        <span class="font-body-md text-body-md text-on-surface">@item.Subject</span>
+                        <span class="font-body-sm text-body-sm text-on-surface-variant truncate ml-1">— @(item.Body != null && item.Body.Length > 80 ? item.Body.Substring(0, 80) + "..." : item.Body)</span>
+                    </div>
+                </a>
+            </div>
+            <div class="flex-shrink-0 ml-4 flex items-center gap-3">
+                @if (item.Category != null)
+                {
+                    <span class="hidden md:flex bg-tertiary-container text-on-tertiary-container font-label-sm text-[10px] px-2 py-0.5 rounded-full items-center gap-1">@item.Category.Name</span>
+                }
+                <span class="font-label-sm text-label-sm text-on-surface-variant">@item.SendDate.ToString("dd MMM")</span>
+                <a href="/Message/Restore/@item.Id" class="material-symbols-outlined text-on-surface-variant hover:text-primary text-xl transition-colors" data-icon="restore_from_trash">restore_from_trash</a>
+            </div>
+        </div>
+    }
+</div>
