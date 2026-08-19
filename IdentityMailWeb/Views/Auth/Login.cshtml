@@ -1,19 +1,21 @@
-﻿@model LoginDto
+@model LoginDto
 
 @{
-    Layout = "_AuthLayout";
-    ViewData["Title"] = "Giriş Yap";
+Layout = "_AuthLayout";
+ViewData["Title"] = "Giriş Yap";
 }
 
 <!-- Logo Section -->
 <main class="flex-grow flex items-center justify-center p-container-padding-mobile md:p-container-padding-desktop">
 
-    <div class="w-full max-w-[480px] bg-surface-container-lowest rounded-xl shadow-soft-level-1 border border-surface-variant p-8 md:p-10 relative overflow-hidden">
+    <div
+        class="w-full max-w-[480px] bg-surface-container-lowest rounded-xl shadow-soft-level-1 border border-surface-variant p-8 md:p-10 relative overflow-hidden">
 
         <div class="flex flex-col items-center mb-8 text-center">
-            <img alt="IdentityMail Logo" class="w-auto h-24 object-contain mb-6"
-                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-hzmJcAuSh6FC6di4v0s1Lf15XrOSSPMuHLNySC9Ik5oQblmxMDSCcFNbTzsZuhoq2I-qR9hoLIT9yhekcYObAWITAWUf0c629PBCc3pTmuWHCpq51Zh72aLz6A0C05F-Ax-z78T2o9uMyT4sn_C5tqi2WzAo60e3jcQvKnUJ2enbFdiAoxObTp_alQZ0v0jyKsAjy10sB_mY6zLKCQMekcTAN8NoFivdfgLAoh0ko-HSR8Hb_YunHw" />
-            <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">
+            <img alt="IdentityMail Logo" class="w-auto h-20 object-contain mb-6"
+                src="~/images/identitymail-logo.png" />
+            <h1
+                class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">
                 Giriş Yap
             </h1>
             <p class="font-body-md text-body-md text-on-surface-variant">Mesajlarına güvenle ulaş.</p>
@@ -26,32 +28,39 @@
                     E-posta Adresiniz
                 </label>
                 <div class="relative">
-                    <span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-outline">mail</span>
-                    <input asp-for="Email" class="w-full pl-10 pr-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface focus:outline-none input-glow transition-all duration-200 font-body-md text-body-md"
-                           id="email" placeholder="ornek@alanadi.com" required="" type="email" />
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-outline">mail</span>
+                    <input asp-for="Email"
+                        class="w-full pl-10 pr-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface focus:outline-none input-glow transition-all duration-200 font-body-md text-body-md"
+                        id="email" placeholder="ornek@alanadi.com" required="" type="email" />
                 </div>
             </div>
             <!-- Password Field -->
             <div>
                 <label class="block font-label-md text-label-md text-on-surface mb-2" for="password">Şifre</label>
                 <div class="relative">
-                    <span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-outline">lock</span>
-                    <input asp-for="Password" class="w-full pl-10 pr-10 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface focus:outline-none input-glow transition-all duration-200 font-body-md text-body-md"
-                           id="password" placeholder="••••••••" required="" type="password" />
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-outline">lock</span>
+                    <input asp-for="Password"
+                        class="w-full pl-10 pr-10 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface focus:outline-none input-glow transition-all duration-200 font-body-md text-body-md"
+                        id="password" placeholder="••••••••" required="" type="password" />
                     <button aria-label="Toggle password visibility"
-                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-outline hover:text-on-surface transition-colors"
-                            type="button">
+                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-outline hover:text-on-surface transition-colors"
+                        type="button">
                         <span class="material-symbols-outlined">visibility_off</span>
                     </button>
                 </div>
                 <div class="flex justify-end mt-2">
-                    <a asp-controller="Auth" asp-action="ForgotPassword" class="font-label-sm text-label-sm text-primary hover:text-primary-container transition-colors">Şifremi Unuttum</a>
+                    <a asp-controller="Auth" asp-action="ForgotPassword"
+                        class="font-label-sm text-label-sm text-primary hover:text-primary-container transition-colors">Şifremi
+                        Unuttum</a>
                 </div>
             </div>
             <span class="text-danger">@Html.ValidationSummary()</span>
             <!-- Submit Button -->
-            <button class="w-full bg-brand-gradient text-on-primary py-3 px-4 rounded-lg font-label-md text-label-md hover:opacity-90 active:scale-[0.98] transition-all duration-200 shadow-sm flex items-center justify-center gap-2"
-                    type="submit">
+            <button
+                class="w-full bg-brand-gradient text-on-primary py-3 px-4 rounded-lg font-label-md text-label-md hover:opacity-90 active:scale-[0.98] transition-all duration-200 shadow-sm flex items-center justify-center gap-2"
+                type="submit">
                 Devam Et
                 <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
             </button>
@@ -60,7 +69,9 @@
         <div class="mt-8 text-center border-t border-surface-variant pt-6">
             <p class="font-body-sm text-body-sm text-on-surface-variant">
                 Hesabın yok mu?
-                <a asp-controller="Auth" asp-action="Register" class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors ml-1">Kayıt Ol</a>
+                <a asp-controller="Auth" asp-action="Register"
+                    class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors ml-1">Kayıt
+                    Ol</a>
             </p>
         </div>
 

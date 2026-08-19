@@ -7,11 +7,11 @@ obj/
 *.cache
 *.log
 
-## Cursor / AI
+## Editor
 .cursor/
 
-## Stitch UI kaynak dosyaları (referans HTML'ler, repo'ya gereksiz)
-wwwroot/theme/stitch_ui/
+## Theme reference files
+IdentityMailWeb/wwwroot/theme/stitch_ui/
 
 ## OS
 Thumbs.db
